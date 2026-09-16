@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pets cadastrados - MundoPet
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mb-4">
+    🐾 Pets cadastrados
+</h1>
+
+{% if pets %}
+
+<div class="row">
+
+    {% for pet in pets %}
+
+    <div class="col-md-6 col-lg-4 mb-4">
+
+        <div class="card h-100 shadow-sm">
+
+            <div class="card-body">
+
+                <h3 class="card-title">
+                    🐾 {{ pet.nome }}
+                </h3>
+
+                <hr>
+
+                <p>
+                    <strong>Espécie:</strong>
+                    {{ pet.especie }}
+                </p>
+
+                <p>
+                    <strong>Raça:</strong>
+                    {{ pet.raca or "Não informada" }}
+                </p>
+
+                <p>
+                    <strong>Idade:</strong>
+                    {{ pet.idade if pet.idade is not none else "Não informada" }}
+                    {% if pet.idade is not none %}anos{% endif %}
+                </p>
+
+                <p>
+                    <strong>Tutor:</strong>
+                    {{ pet.tutor }}
+                </p>
+
+                <div class="mt-4">
+
+                    <a
+                        href="{{ url_for('editar', id=pet.id) }}"
+                        class="btn btn-warning"
+                    >
+                        ✏️ Editar
+                    </a>
+
+                    <form
+                        action="{{ url_for('excluir', id=pet.id) }}"
+                        method="POST"
+                        style="display: inline;"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger"
+                            onclick="return confirm('Tem certeza que deseja excluir este pet?')"
+                        >
+                            🗑️ Excluir
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+    🐾 Ainda não existem pets cadastrados.
+</div>
+
+{% endif %}
+
+<div class="text-center mt-3">
+
+    <a href="/cadastro" class="btn btn-primary">
+        🐶 Cadastrar novo pet
+    </a>
+
+</div>
+
+{% endblock %}

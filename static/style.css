@@ -1,0 +1,290 @@
+/* ==============================
+   ESTILO GERAL - MUNDOPET
+   ============================== */
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* ==============================
+   MENU
+   ============================== */
+
+.navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.navbar .btn {
+    margin-left: 5px;
+}
+
+/* ==============================
+   TÍTULOS
+   ============================== */
+
+h1 {
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+/* ==============================
+   CARDS
+   ============================== */
+
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ==============================
+   BOTÕES
+   ============================== */
+
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* ==============================
+   FORMULÁRIOS
+   ============================== */
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* ==============================
+   RODAPÉ
+   ============================== */
+
+footer {
+    color: #666;
+    border-top: 1px solid #ddd;
+}
+
+/* ==============================
+   TELA INICIAL
+   ============================== */
+
+.hero {
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+
+@media (max-width: 768px) {
+
+    .navbar .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar .btn {
+        margin-bottom: 5px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+}/* ==============================
+   ESTILO GERAL - MUNDOPET
+   ============================== */
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* ==============================
+   MENU
+   ============================== */
+
+.navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.navbar .btn {
+    margin-left: 5px;
+}
+
+/* ==============================
+   TÍTULOS
+   ============================== */
+
+h1 {
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+/* ==============================
+   CARDS
+   ============================== */
+
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ==============================
+   BOTÕES
+   ============================== */
+
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* ==============================
+   FORMULÁRIOS
+   ============================== */
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* ==============================
+   RODAPÉ
+   ============================== */
+
+footer {
+    color: #666;
+    border-top: 1px solid #ddd;
+}
+
+/* ==============================
+   TELA INICIAL
+   ============================== */
+
+.hero {
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+
+@media (max-width: 768px) {
+
+    .navbar .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar .btn {
+        margin-bottom: 5px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+}
+/* ==============================
+   IDENTIDADE VISUAL MUNDOPET
+   ============================== */
+
+.navbar {
+    background-color: #417cd6 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.navbar .btn {
+    border: none;
+}
+
+.hero strong {
+    color: #417cd6;
+}
+
+.hero {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: white;
+}
+
+footer {
+    margin-top: 50px;
+}

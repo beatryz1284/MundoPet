@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cadastrar Pet - MundoPet
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <h1 class="text-center mb-4">
+                    🐶 Cadastrar novo pet
+                </h1>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">
+                            Nome do pet
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="nome"
+                            name="nome"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+    <label for="especie" class="form-label">
+        Espécie
+    </label>
+
+    <select
+        class="form-select"
+        id="especie"
+        name="especie"
+        required
+    >
+        <option value="">Selecione a espécie</option>
+        <option value="Cachorro">🐶 Cachorro</option>
+        <option value="Gato">🐱 Gato</option>
+        <option value="Pássaro">🐦 Pássaro</option>
+        <option value="Coelho">🐰 Coelho</option>
+        <option value="Outro">🐾 Outro</option>
+    </select>
+    </div>
+
+                    <div class="mb-3">
+                        <label for="raca" class="form-label">
+                            Raça
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="raca"
+                            name="raca"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="idade" class="form-label">
+                            Idade
+                        </label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="idade"
+                            name="idade"
+                            min="0"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tutor" class="form-label">
+                            Nome do tutor
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="tutor"
+                            name="tutor"
+                            required
+                        >
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            🐾 Cadastrar Pet
+                        </button>
+
+                        <a href="/" class="btn btn-secondary">
+                            Voltar
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
