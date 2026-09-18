@@ -1,110 +1,787 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cadastrar Pet - MundoPet
+Cadastrar Pet | MundoPet
 {% endblock %}
+
 
 {% block content %}
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
+<style>
 
-        <div class="card shadow-sm">
-            <div class="card-body">
+/* =========================================================
+   PÁGINA DE CADASTRO
+========================================================= */
 
-                <h1 class="text-center mb-4">
-                    🐶 Cadastrar novo pet
-                </h1>
+.cadastro-page {
+    background: #eaf8fc;
+    min-height: calc(100vh - 90px);
+    padding: 70px 0 90px;
+    position: relative;
+    overflow: hidden;
+}
 
-                <form method="POST">
 
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">
-                            Nome do pet
-                        </label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="nome"
-                            name="nome"
-                            required
-                        >
-                    </div>
+.cadastro-page::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    background: #d5f0f7;
+    border-radius: 50%;
+    top: -120px;
+    left: -90px;
+}
 
-                    <div class="mb-3">
-    <label for="especie" class="form-label">
-        Espécie
-    </label>
 
-    <select
-        class="form-select"
-        id="especie"
-        name="especie"
-        required
-    >
-        <option value="">Selecione a espécie</option>
-        <option value="Cachorro">🐶 Cachorro</option>
-        <option value="Gato">🐱 Gato</option>
-        <option value="Pássaro">🐦 Pássaro</option>
-        <option value="Coelho">🐰 Coelho</option>
-        <option value="Outro">🐾 Outro</option>
-    </select>
-    </div>
+.cadastro-page::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    background: #fff1e8;
+    border-radius: 50%;
+    right: -120px;
+    bottom: -100px;
+}
 
-                    <div class="mb-3">
-                        <label for="raca" class="form-label">
-                            Raça
-                        </label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="raca"
-                            name="raca"
-                        >
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="idade" class="form-label">
-                            Idade
-                        </label>
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="idade"
-                            name="idade"
-                            min="0"
-                        >
-                    </div>
+.cadastro-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
 
-                    <div class="mb-3">
-                        <label for="tutor" class="form-label">
-                            Nome do tutor
-                        </label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="tutor"
-                            name="tutor"
-                            required
-                        >
-                    </div>
 
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary">
-                            🐾 Cadastrar Pet
-                        </button>
+/* =========================================================
+   CABEÇALHO
+========================================================= */
 
-                        <a href="/" class="btn btn-secondary">
-                            Voltar
-                        </a>
-                    </div>
+.cadastro-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
 
-                </form>
+
+.cadastro-label {
+    display: inline-block;
+    color: #e97855;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+
+.cadastro-header h1 {
+    color: #171717;
+    font-size: clamp(35px, 5vw, 52px);
+    font-weight: 900;
+    margin: 0 0 12px;
+}
+
+
+.cadastro-header h1 span {
+    color: #e97855;
+}
+
+
+.cadastro-header p {
+    color: #4d6170;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   CARD DO FORMULÁRIO
+========================================================= */
+
+.cadastro-card {
+    background: #ffffff;
+    border: 1px solid #d8e7eb;
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(25, 45, 55, 0.10);
+    overflow: hidden;
+}
+
+
+.cadastro-card-top {
+    background: #171717;
+    padding: 28px 35px;
+    color: white;
+}
+
+
+.cadastro-card-top h2 {
+    margin: 0 0 5px;
+    font-size: 23px;
+    font-weight: 900;
+}
+
+
+.cadastro-card-top p {
+    margin: 0;
+    color: #d8d8d8;
+    font-size: 14px;
+}
+
+
+.cadastro-form {
+    padding: 35px;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.campo-grupo {
+    margin-bottom: 23px;
+}
+
+
+.campo-grupo label {
+    display: block;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+
+.campo-grupo label .obrigatorio {
+    color: #e97855;
+}
+
+
+.cadastro-form input,
+.cadastro-form select,
+.cadastro-form textarea {
+    width: 100%;
+    border: 1px solid #ccdce1;
+    border-radius: 11px;
+    padding: 12px 14px;
+    font-size: 15px;
+    color: #171717;
+    background: #ffffff;
+    transition: 0.2s;
+}
+
+
+.cadastro-form input:focus,
+.cadastro-form select:focus,
+.cadastro-form textarea:focus {
+    outline: none;
+    border-color: #e97855;
+    box-shadow: 0 0 0 3px rgba(233, 120, 85, 0.12);
+}
+
+
+.cadastro-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+
+.campo-ajuda {
+    display: block;
+    margin-top: 6px;
+    color: #71808a;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LINHAS
+========================================================= */
+
+.campo-linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+
+.campo-idade {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   ÁREA DA FOTO
+========================================================= */
+
+.foto-area {
+    background: #eaf8fc;
+    border: 2px dashed #b8dce6;
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 25px;
+}
+
+
+.foto-area label {
+    margin-bottom: 7px;
+}
+
+
+.foto-area input {
+    background: white;
+}
+
+
+/* =========================================================
+   PET DA SEMANA
+========================================================= */
+
+.destaque-area {
+    background: #fff4ed;
+    border: 1px solid #ffd4c4;
+    border-radius: 15px;
+    padding: 18px 20px;
+    margin-top: 5px;
+    margin-bottom: 28px;
+}
+
+
+.destaque-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+
+.destaque-check input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #e97855;
+}
+
+
+.destaque-check label {
+    margin: 0;
+}
+
+
+.destaque-check strong {
+    display: block;
+    color: #171717;
+    margin-bottom: 3px;
+}
+
+
+.destaque-check small {
+    color: #6d777c;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.cadastro-botoes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+}
+
+
+.btn-cadastrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e97855;
+    color: white !important;
+    text-decoration: none;
+    border: 2px solid #e97855;
+    border-radius: 11px;
+    padding: 13px 24px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+.btn-cadastrar:hover {
+    background: #d96340;
+    border-color: #d96340;
+    transform: translateY(-2px);
+}
+
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #171717 !important;
+    text-decoration: none;
+    border: 2px solid #171717;
+    border-radius: 11px;
+    padding: 13px 24px;
+    font-weight: 800;
+    transition: 0.2s;
+}
+
+
+.btn-voltar:hover {
+    background: #f5f5f5;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .cadastro-page {
+        padding: 45px 0 60px;
+    }
+
+
+    .cadastro-container {
+        width: 92%;
+    }
+
+
+    .cadastro-form {
+        padding: 25px 20px;
+    }
+
+
+    .cadastro-card-top {
+        padding: 24px 20px;
+    }
+
+
+    .campo-linha {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+
+    .campo-idade {
+        grid-template-columns: 1fr;
+    }
+
+
+    .cadastro-header h1 {
+        font-size: 36px;
+    }
+
+}
+
+</style>
+
+
+<section class="cadastro-page">
+
+    <div class="cadastro-container">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <div class="cadastro-header">
+
+            <div class="cadastro-label">
+                🐾 MUNDOPET
+            </div>
+
+            <h1>
+                Cadastre um <span>amiguinho</span>
+            </h1>
+
+            <p>
+                Ajude um cachorro ou gato a encontrar
+                uma família responsável e cheia de amor.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORMULÁRIO
+        ================================================== -->
+
+        <div class="cadastro-card">
+
+
+            <div class="cadastro-card-top">
+
+                <h2>
+                    🐾 Informações do pet
+                </h2>
+
+                <p>
+                    Preencha os dados do animal para
+                    ele aparecer na plataforma.
+                </p>
 
             </div>
+
+
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="cadastro-form"
+            >
+
+
+                <!-- FOTO -->
+
+                <div class="foto-area">
+
+                    <div class="campo-grupo" style="margin-bottom: 0;">
+
+                        <label for="imagem">
+                            📷 Foto do pet
+                        </label>
+
+                        <input
+                            type="file"
+                            id="imagem"
+                            name="imagem"
+                            accept=".jpg,.jpeg,.png,.webp"
+                        >
+
+                        <small class="campo-ajuda">
+                            Escolha uma foto do cachorro ou gato.
+                            Formatos aceitos: JPG, JPEG, PNG ou WEBP.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NOME -->
+
+                <div class="campo-grupo">
+
+                    <label for="nome">
+                        Nome do pet
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Ex.: Nina"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- ESPÉCIE -->
+
+                <div class="campo-grupo">
+
+                    <label for="especie">
+                        Espécie
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <select
+                        id="especie"
+                        name="especie"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione a espécie
+                        </option>
+
+                        <option value="Cachorro">
+                            🐶 Cachorro
+                        </option>
+
+                        <option value="Gato">
+                            🐱 Gato
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- RAÇA -->
+
+                <div class="campo-grupo">
+
+                    <label for="raca">
+                        Raça
+                    </label>
+
+                    <input
+                        type="text"
+                        id="raca"
+                        name="raca"
+                        placeholder="Ex.: Vira-lata, Siamês, Golden Retriever..."
+                    >
+
+                </div>
+
+
+
+                <!-- IDADE -->
+
+                <div class="campo-grupo">
+
+                    <label>
+                        Idade
+                    </label>
+
+                    <div class="campo-idade">
+
+                        <input
+                            type="number"
+                            name="idade"
+                            min="0"
+                            placeholder="Ex.: 2"
+                        >
+
+                        <select
+                            name="unidade_idade"
+                        >
+
+                            <option value="dias">
+                                Dias
+                            </option>
+
+                            <option value="semanas">
+                                Semanas
+                            </option>
+
+                            <option value="meses">
+                                Meses
+                            </option>
+
+                            <option
+                                value="anos"
+                                selected
+                            >
+                                Anos
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <small class="campo-ajuda">
+                        Informe o número e escolha a unidade.
+                    </small>
+
+                </div>
+
+
+
+                <!-- SEXO + PORTE -->
+
+                <div class="campo-linha">
+
+
+                    <div class="campo-grupo">
+
+                        <label for="sexo">
+                            Sexo
+                        </label>
+
+                        <select
+                            id="sexo"
+                            name="sexo"
+                        >
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option value="Fêmea">
+                                ♀ Fêmea
+                            </option>
+
+                            <option value="Macho">
+                                ♂ Macho
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="campo-grupo">
+
+                        <label for="porte">
+                            Porte
+                        </label>
+
+                        <select
+                            id="porte"
+                            name="porte"
+                        >
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option value="Pequeno">
+                                Pequeno
+                            </option>
+
+                            <option value="Médio">
+                                Médio
+                            </option>
+
+                            <option value="Grande">
+                                Grande
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CIDADE -->
+
+                <div class="campo-grupo">
+
+                    <label for="cidade">
+                        📍 Cidade
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cidade"
+                        name="cidade"
+                        placeholder="Ex.: Ariquemes - RO"
+                    >
+
+                </div>
+
+
+
+                <!-- DESCRIÇÃO -->
+
+                <div class="campo-grupo">
+
+                    <label for="descricao">
+                        Sobre o pet
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        placeholder="Conte um pouco sobre a personalidade, comportamento e características do pet..."
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- RESPONSÁVEL -->
+
+                <div class="campo-grupo">
+
+                    <label for="tutor">
+                        Responsável pelo pet
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tutor"
+                        name="tutor"
+                        placeholder="Nome do responsável"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DESTAQUE -->
+
+                <div class="destaque-area">
+
+                    <div class="destaque-check">
+
+                        <input
+                            type="checkbox"
+                            id="destaque"
+                            name="destaque"
+                        >
+
+                        <label for="destaque">
+
+                            <strong>
+                                ⭐ Marcar como Pet da Semana
+                            </strong>
+
+                            <small>
+                                O pet será destacado na página inicial
+                                do MundoPet.
+                            </small>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOTÕES -->
+
+                <div class="cadastro-botoes">
+
+                    <button
+                        type="submit"
+                        class="btn-cadastrar"
+                    >
+                        🐾 Cadastrar Pet
+                    </button>
+
+
+                    <a
+                        href="{{ url_for('galeria') }}"
+                        class="btn-voltar"
+                    >
+                        Voltar para Adotar Pet
+                    </a>
+
+                </div>
+
+
+            </form>
+
         </div>
 
     </div>
-</div>
+
+</section>
 
 {% endblock %}

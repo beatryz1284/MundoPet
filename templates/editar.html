@@ -1,140 +1,556 @@
 {% extends "base.html" %}
 
-{% block title %}
-Editar Pet - MundoPet
-{% endblock %}
+{% block title %}Editar Pet | MundoPet{% endblock %}
 
 {% block content %}
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
+<style>
+    .editar-page {
+        background: #eaf8fc;
+        min-height: 80vh;
+        padding: 50px 0;
+    }
 
-        <div class="card shadow-sm">
-            <div class="card-body">
+    .editar-card {
+        max-width: 850px;
+        margin: auto;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+    }
 
-                <h1 class="text-center mb-4">
-                    ✏️ Editar pet
-                </h1>
+    .editar-topo {
+        background: #171717;
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
 
-                <form method="POST">
+    .editar-topo .icone {
+        font-size: 45px;
+    }
+
+    .editar-topo h1 {
+        font-weight: 800;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .editar-topo p {
+        margin: 0;
+        color: #ddd;
+    }
+
+    .formulario {
+        padding: 35px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #171717;
+    }
+
+    .form-control,
+    .form-select {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 11px 13px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #e97855;
+        box-shadow: 0 0 0 3px rgba(233,120,85,0.15);
+    }
+
+    .imagem-atual {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .imagem-atual img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 18px;
+        border: 4px solid #eaf8fc;
+    }
+
+    .sem-imagem {
+        width: 180px;
+        height: 180px;
+        margin: auto;
+        border-radius: 18px;
+        background: #eaf8fc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+    }
+
+    .botoes {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .btn-salvar {
+        flex: 1;
+        background: #e97855;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 13px;
+        font-weight: bold;
+    }
+
+    .btn-salvar:hover {
+        background: #d96342;
+        color: white;
+    }
+
+    .btn-voltar {
+        flex: 1;
+        background: #171717;
+        color: white;
+        border-radius: 10px;
+        padding: 13px;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .btn-voltar:hover {
+        background: #333;
+        color: white;
+    }
+
+    .destaque-box {
+        background: #eaf8fc;
+        padding: 15px;
+        border-radius: 12px;
+        margin-top: 10px;
+    }
+</style>
+
+
+<section class="editar-page">
+
+    <div class="container">
+
+        <div class="editar-card">
+
+            <!-- CABEÇALHO -->
+
+            <div class="editar-topo">
+
+                <div class="icone">
+                    ✏️🐾
+                </div>
+
+                <h1>Editar Pet</h1>
+
+                <p>
+                    Atualize as informações de {{ pet.nome }}.
+                </p>
+
+            </div>
+
+
+            <!-- FORMULÁRIO -->
+
+            <div class="formulario">
+
+                <form
+                    action="{{ url_for('editar', id=pet.id) }}"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    <!-- FOTO ATUAL -->
+
+                    <div class="imagem-atual">
+
+                        {% if pet.imagem %}
+
+                            <img
+                                src="{{ url_for('static', filename='img/pets/' + pet.imagem) }}"
+                                alt="Foto de {{ pet.nome }}"
+                            >
+
+                        {% elif pet.especie == "Gato" %}
+
+                            <img
+                                src="{{ url_for('static', filename='img/gato.jpg') }}"
+                                alt="Gato"
+                            >
+
+                        {% else %}
+
+                            <img
+                                src="{{ url_for('static', filename='img/cachorro.jpg') }}"
+                                alt="Cachorro"
+                            >
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- NOVA FOTO -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            📷 Alterar foto
+                        </label>
+
+                        <input
+                            type="file"
+                            name="imagem"
+                            class="form-control"
+                            accept=".jpg,.jpeg,.png,.webp"
+                        >
+
+                        <small class="text-muted">
+                            Se não escolher uma nova foto, a foto atual será mantida.
+                        </small>
+
+                    </div>
+
+
+                    <!-- NOME -->
 
                     <div class="mb-3">
-                        <label for="nome" class="form-label">
-                            Nome do pet
+
+                        <label class="form-label">
+                            🐾 Nome do pet
                         </label>
 
                         <input
                             type="text"
-                            class="form-control"
-                            id="nome"
                             name="nome"
+                            class="form-control"
                             value="{{ pet.nome }}"
                             required
                         >
+
                     </div>
 
+
+                    <div class="row">
+
+                        <!-- ESPÉCIE -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                🐶🐱 Espécie
+                            </label>
+
+                            <select
+                                name="especie"
+                                class="form-select"
+                                required
+                            >
+
+                                <option
+                                    value="Cachorro"
+                                    {% if pet.especie == "Cachorro" %}selected{% endif %}
+                                >
+                                    🐶 Cachorro
+                                </option>
+
+                                <option
+                                    value="Gato"
+                                    {% if pet.especie == "Gato" %}selected{% endif %}
+                                >
+                                    🐱 Gato
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- RAÇA -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                🐾 Raça
+                            </label>
+
+                            <input
+                                type="text"
+                                name="raca"
+                                class="form-control"
+                                value="{{ pet.raca or '' }}"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IDADE -->
+
                     <div class="mb-3">
-                        <label for="especie" class="form-label">
-                            Espécie
+
+                        <label class="form-label">
+                            📅 Idade
                         </label>
 
-                        <select
-                            class="form-select"
-                            id="especie"
-                            name="especie"
-                            required
-                        >
-                            <option value="">Selecione a espécie</option>
+                        <div class="row">
 
-                            <option value="Cachorro"
-                                {% if pet.especie == "Cachorro" %}selected{% endif %}>
-                                🐶 Cachorro
-                            </option>
+                            <div class="col-md-6 mb-2">
 
-                            <option value="Gato"
-                                {% if pet.especie == "Gato" %}selected{% endif %}>
-                                🐱 Gato
-                            </option>
+                                <input
+                                    type="number"
+                                    name="idade"
+                                    class="form-control"
+                                    min="0"
+                                    value="{{ pet.idade or '' }}"
+                                >
 
-                            <option value="Pássaro"
-                                {% if pet.especie == "Pássaro" %}selected{% endif %}>
-                                🐦 Pássaro
-                            </option>
+                            </div>
 
-                            <option value="Coelho"
-                                {% if pet.especie == "Coelho" %}selected{% endif %}>
-                                🐰 Coelho
-                            </option>
+                            <div class="col-md-6 mb-2">
 
-                            <option value="Outro"
-                                {% if pet.especie == "Outro" %}selected{% endif %}>
-                                🐾 Outro
-                            </option>
-                        </select>
+                                <select
+                                    name="unidade_idade"
+                                    class="form-select"
+                                >
+
+                                    <option
+                                        value="dias"
+                                        {% if pet.unidade_idade == "dias" %}selected{% endif %}
+                                    >
+                                        Dias
+                                    </option>
+
+                                    <option
+                                        value="semanas"
+                                        {% if pet.unidade_idade == "semanas" %}selected{% endif %}
+                                    >
+                                        Semanas
+                                    </option>
+
+                                    <option
+                                        value="meses"
+                                        {% if pet.unidade_idade == "meses" %}selected{% endif %}
+                                    >
+                                        Meses
+                                    </option>
+
+                                    <option
+                                        value="anos"
+                                        {% if pet.unidade_idade == "anos" or not pet.unidade_idade %}selected{% endif %}
+                                    >
+                                        Anos
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
+
+                    <div class="row">
+
+                        <!-- SEXO -->
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+                                ⚥ Sexo
+                            </label>
+
+                            <select
+                                name="sexo"
+                                class="form-select"
+                            >
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option
+                                    value="Fêmea"
+                                    {% if pet.sexo == "Fêmea" %}selected{% endif %}
+                                >
+                                    ♀ Fêmea
+                                </option>
+
+                                <option
+                                    value="Macho"
+                                    {% if pet.sexo == "Macho" %}selected{% endif %}
+                                >
+                                    ♂ Macho
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- PORTE -->
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+                                📏 Porte
+                            </label>
+
+                            <select
+                                name="porte"
+                                class="form-select"
+                            >
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option
+                                    value="Pequeno"
+                                    {% if pet.porte == "Pequeno" %}selected{% endif %}
+                                >
+                                    Pequeno
+                                </option>
+
+                                <option
+                                    value="Médio"
+                                    {% if pet.porte == "Médio" %}selected{% endif %}
+                                >
+                                    Médio
+                                </option>
+
+                                <option
+                                    value="Grande"
+                                    {% if pet.porte == "Grande" %}selected{% endif %}
+                                >
+                                    Grande
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- CIDADE -->
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+                                📍 Cidade
+                            </label>
+
+                            <input
+                                type="text"
+                                name="cidade"
+                                class="form-control"
+                                value="{{ pet.cidade or '' }}"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIÇÃO -->
+
                     <div class="mb-3">
-                        <label for="raca" class="form-label">
-                            Raça
+
+                        <label class="form-label">
+                            📝 Descrição
+                        </label>
+
+                        <textarea
+                            name="descricao"
+                            class="form-control"
+                            rows="5"
+                        >{{ pet.descricao or '' }}</textarea>
+
+                    </div>
+
+
+                    <!-- TUTOR -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            👤 Tutor / Responsável
                         </label>
 
                         <input
                             type="text"
-                            class="form-control"
-                            id="raca"
-                            name="raca"
-                            value="{{ pet.raca or '' }}"
-                        >
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="idade" class="form-label">
-                            Idade
-                        </label>
-
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="idade"
-                            name="idade"
-                            min="0"
-                            value="{{ pet.idade or '' }}"
-                        >
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="tutor" class="form-label">
-                            Nome do tutor
-                        </label>
-
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="tutor"
                             name="tutor"
+                            class="form-control"
                             value="{{ pet.tutor }}"
                             required
                         >
+
                     </div>
 
-                    <div class="text-center mt-4">
 
-                        <button type="submit" class="btn btn-warning">
+                    <!-- DESTAQUE -->
+
+                    <div class="destaque-box">
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="destaque"
+                                id="destaque"
+                                {% if pet.destaque %}checked{% endif %}
+                            >
+
+                            <label
+                                class="form-check-label"
+                                for="destaque"
+                            >
+                                ⭐ <strong>Pet da Semana</strong>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="botoes">
+
+                        <a
+                            href="{{ url_for('pets') }}"
+                            class="btn-voltar"
+                        >
+                            ← Voltar
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn-salvar"
+                        >
                             💾 Salvar alterações
                         </button>
-
-                        <a href="/pets" class="btn btn-secondary">
-                            Voltar
-                        </a>
 
                     </div>
 
                 </form>
 
             </div>
+
         </div>
 
     </div>
-</div>
+
+</section>
 
 {% endblock %}

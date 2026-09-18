@@ -1,0 +1,907 @@
+{% extends "base.html" %}
+
+{% block title %}
+Adotar Pet | MundoPet
+{% endblock %}
+
+
+{% block content %}
+
+<section class="gallery-page">
+
+    <div class="container">
+
+        <!-- CABEÇALHO -->
+
+        <div class="gallery-header text-center">
+
+            <span>
+                🐾 ADOÇÃO RESPONSÁVEL
+            </span>
+
+            <h1>
+                Nossos amiguinhos para adoção
+            </h1>
+
+            <p>
+                Encontre um cachorro ou gato que esteja
+                esperando por uma família responsável,
+                carinhosa e cheia de amor.
+            </p>
+
+        </div>
+
+
+        <!-- PESQUISA E FILTROS -->
+
+        <div class="gallery-tools">
+
+            <div class="search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="buscarPet"
+                    placeholder="Busque por nome, raça ou cidade..."
+                >
+
+            </div>
+
+
+            <div class="gallery-filters">
+
+                <button
+                    type="button"
+                    class="filter-btn active"
+                    onclick="filtrarPets('todos', this)"
+                >
+                    Todos
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-btn"
+                    onclick="filtrarPets('Cachorro', this)"
+                >
+                    🐶 Cães
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-btn"
+                    onclick="filtrarPets('Gato', this)"
+                >
+                    🐱 Gatos
+                </button>
+
+            </div>
+
+
+            <div class="gallery-result">
+
+                Exibindo
+                <strong>{{ pets|length }}</strong>
+                pets disponíveis
+
+                <span>
+                    🧡 Encontre seu novo melhor amigo
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- TÍTULO -->
+
+        <div class="pets-section-title">
+
+            <div>
+
+                <span>
+                    DISPONÍVEIS AGORA
+                </span>
+
+                <h2>
+                    Conheça nossos pets
+                </h2>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('cadastro') }}"
+                class="add-pet-link"
+            >
+                + Cadastrar pet
+            </a>
+
+        </div>
+
+
+        <!-- PETS -->
+
+        <div
+            class="row g-4"
+            id="galeriaPets"
+        >
+
+            {% if pets %}
+
+                {% for pet in pets %}
+
+                <div
+                    class="col-md-6 col-lg-4 col-xl-3 pet-item"
+                    data-especie="{{ pet.especie }}"
+                    data-nome="{{ pet.nome|lower }}"
+                    data-raca="{{ pet.raca|default('', true)|lower }}"
+                    data-cidade="{{ pet.cidade|default('', true)|lower }}"
+                >
+
+                    <div class="adoption-card">
+
+
+                        <!-- FOTO -->
+
+                        <div class="adoption-image">
+
+                            {% if pet.imagem %}
+
+                                <img
+                                    src="{{ url_for('static', filename='img/pets/' ~ pet.imagem) }}"
+                                    alt="Foto de {{ pet.nome }}"
+                                >
+
+                            {% elif pet.especie == "Cachorro" %}
+
+                                <img
+                                    src="{{ url_for('static', filename='img/cachorro.jpg') }}"
+                                    alt="Cachorro"
+                                >
+
+                            {% elif pet.especie == "Gato" %}
+
+                                <img
+                                    src="{{ url_for('static', filename='img/gato.jpg') }}"
+                                    alt="Gato"
+                                >
+
+                            {% else %}
+
+                                <div class="pet-placeholder">
+                                    🐾
+                                </div>
+
+                            {% endif %}
+
+
+                            {% if pet.destaque %}
+
+                                <span class="featured-badge">
+                                    ⭐ Pet da Semana
+                                </span>
+
+                            {% endif %}
+
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                onclick="favoritarPet(this)"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <!-- INFORMAÇÕES -->
+
+                        <div class="adoption-content">
+
+
+                            <span class="adoption-species">
+
+                                {% if pet.especie == "Cachorro" %}
+
+                                    🐶 Cachorro
+
+                                {% else %}
+
+                                    🐱 Gato
+
+                                {% endif %}
+
+                            </span>
+
+
+                            <h2>
+                                {{ pet.nome }}
+                            </h2>
+
+
+                            {% if pet.raca %}
+
+                                <p class="pet-breed">
+
+                                    {{ pet.raca }}
+
+                                </p>
+
+                            {% endif %}
+
+
+                            <!-- DETALHES -->
+
+                            <div class="adoption-details">
+
+                                {% if pet.idade is not none %}
+
+                                    <span>
+
+                                        📅
+                                        {{ pet.idade }}
+                                        {{ pet.unidade_idade or "anos" }}
+
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if pet.sexo %}
+
+                                    <span>
+
+                                        {% if pet.sexo == "Fêmea" %}
+
+                                            ♀ Fêmea
+
+                                        {% else %}
+
+                                            ♂ Macho
+
+                                        {% endif %}
+
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if pet.porte %}
+
+                                    <span>
+
+                                        📏 {{ pet.porte }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- CIDADE -->
+
+                            {% if pet.cidade %}
+
+                                <p class="adoption-city">
+
+                                    📍 {{ pet.cidade }}
+
+                                </p>
+
+                            {% endif %}
+
+
+                            <!-- DESCRIÇÃO -->
+
+                            <p class="adoption-description">
+
+                                {% if pet.descricao %}
+
+                                    {{ pet.descricao }}
+
+                                {% else %}
+
+                                    Este pet está esperando uma
+                                    família responsável e carinhosa.
+
+                                {% endif %}
+
+                            </p>
+
+
+                            <!-- BOTÃO -->
+
+                            <div class="adoption-footer">
+
+                                <span class="adoption-status">
+                                    🧡 Disponível para adoção
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    class="btn-adopt"
+                                    data-nome="{{ pet.nome }}"
+                                    data-especie="{{ pet.especie }}"
+                                    data-idade="{{ pet.idade if pet.idade is not none else '' }}"
+                                    data-unidade="{{ pet.unidade_idade or 'anos' }}"
+                                    data-sexo="{{ pet.sexo or 'Não informado' }}"
+                                    data-porte="{{ pet.porte or 'Não informado' }}"
+                                    data-cidade="{{ pet.cidade or 'Não informado' }}"
+                                    data-raca="{{ pet.raca or 'Não informada' }}"
+                                    onclick="mostrarPet(this)"
+                                >
+                                    Conhecer ❤️
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <!-- NENHUM PET -->
+
+                <div class="col-12">
+
+                    <div class="empty-gallery">
+
+                        <div class="empty-paw">
+                            🐾
+                        </div>
+
+                        <h2>
+                            Nenhum pet cadastrado ainda
+                        </h2>
+
+                        <p>
+                            Cadastre um cachorro ou gato
+                            para ele aparecer aqui.
+                        </p>
+
+                        <a
+                            href="{{ url_for('cadastro') }}"
+                            class="btn-mundopet-orange"
+                        >
+                            Cadastrar pet
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- MENSAGEM MOTIVACIONAL -->
+
+        <div class="adoption-message">
+
+            <div class="adoption-message-icon">
+                🧡
+            </div>
+
+            <div>
+
+                <span>
+                    ADOÇÃO RESPONSÁVEL
+                </span>
+
+                <h2>
+                    Acolha um animal e transforme uma vida.
+                </h2>
+
+                <p>
+                    Um lar cheio de amor pode fazer toda a diferença.
+                    Adotar é dar uma nova oportunidade e ganhar
+                    um companheiro para a vida.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MODAL
+====================================================== -->
+
+<div
+    id="petModal"
+    class="pet-modal-overlay"
+    style="display: none;"
+>
+
+    <div class="pet-modal-box">
+
+        <button
+            type="button"
+            class="pet-modal-close"
+            onclick="fecharPet()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-paw">
+            🐾
+        </div>
+
+
+        <span class="modal-small-title">
+            CONHEÇA ESSE AMIGUINHO
+        </span>
+
+
+        <h2 id="modalPetNome">
+        </h2>
+
+
+        <p
+            id="modalPetEspecie"
+            class="modal-species"
+        >
+        </p>
+
+
+        <div class="modal-details">
+
+            <div>
+
+                <small>
+                    IDADE
+                </small>
+
+                <strong id="modalPetIdade">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    SEXO
+                </small>
+
+                <strong id="modalPetSexo">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    PORTE
+                </small>
+
+                <strong id="modalPetPorte">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    LOCAL
+                </small>
+
+                <strong id="modalPetCidade">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-breed">
+
+            <strong>
+                Raça:
+            </strong>
+
+            <span id="modalPetRaca">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="modal-adoption-message">
+
+            ❤️ Este pet está esperando uma família
+            responsável e carinhosa.
+
+            <br><br>
+
+            Talvez você seja o lar que ele procura.
+
+        </div>
+
+
+        <button
+            type="button"
+            class="btn-modal-close"
+            onclick="fecharPet()"
+        >
+            Fechar
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+let filtroAtual = "todos";
+
+
+/* =====================================================
+   CAMPO DE BUSCA
+===================================================== */
+
+const campoBusca =
+    document.getElementById("buscarPet");
+
+
+if (campoBusca) {
+
+    campoBusca.addEventListener(
+        "input",
+        aplicarFiltros
+    );
+
+}
+
+
+/* =====================================================
+   FILTRO
+===================================================== */
+
+function filtrarPets(
+    especie,
+    botao
+) {
+
+    filtroAtual = especie;
+
+
+    const botoes =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
+
+
+    botoes.forEach(
+        function(button) {
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    botao.classList.add(
+        "active"
+    );
+
+
+    aplicarFiltros();
+
+}
+
+
+/* =====================================================
+   APLICAR FILTROS
+===================================================== */
+
+function aplicarFiltros() {
+
+    const busca =
+        campoBusca
+            ? campoBusca.value.toLowerCase().trim()
+            : "";
+
+
+    const cards =
+        document.querySelectorAll(
+            ".pet-item"
+        );
+
+
+    cards.forEach(
+        function(card) {
+
+            const especie =
+                card.dataset.especie || "";
+
+
+            const nome =
+                card.dataset.nome || "";
+
+
+            const raca =
+                card.dataset.raca || "";
+
+
+            const cidade =
+                card.dataset.cidade || "";
+
+
+            const especieOk =
+                filtroAtual === "todos" ||
+                especie === filtroAtual;
+
+
+            const buscaOk =
+                nome.includes(busca) ||
+                raca.includes(busca) ||
+                cidade.includes(busca);
+
+
+            if (
+                especieOk &&
+                buscaOk
+            ) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ABRIR MODAL
+===================================================== */
+
+function mostrarPet(botao) {
+
+    const nome =
+        botao.dataset.nome;
+
+
+    const especie =
+        botao.dataset.especie;
+
+
+    const idade =
+        botao.dataset.idade;
+
+
+    const unidade =
+        botao.dataset.unidade;
+
+
+    const sexo =
+        botao.dataset.sexo;
+
+
+    const porte =
+        botao.dataset.porte;
+
+
+    const cidade =
+        botao.dataset.cidade;
+
+
+    const raca =
+        botao.dataset.raca;
+
+
+    document.getElementById(
+        "modalPetNome"
+    ).textContent = nome;
+
+
+    if (
+        especie === "Cachorro"
+    ) {
+
+        document.getElementById(
+            "modalPetEspecie"
+        ).textContent =
+            "🐶 Cachorro";
+
+    } else {
+
+        document.getElementById(
+            "modalPetEspecie"
+        ).textContent =
+            "🐱 Gato";
+
+    }
+
+
+    if (idade) {
+
+        document.getElementById(
+            "modalPetIdade"
+        ).textContent =
+            idade + " " + unidade;
+
+    } else {
+
+        document.getElementById(
+            "modalPetIdade"
+        ).textContent =
+            "Não informada";
+
+    }
+
+
+    document.getElementById(
+        "modalPetSexo"
+    ).textContent =
+        sexo;
+
+
+    document.getElementById(
+        "modalPetPorte"
+    ).textContent =
+        porte;
+
+
+    document.getElementById(
+        "modalPetCidade"
+    ).textContent =
+        cidade;
+
+
+    document.getElementById(
+        "modalPetRaca"
+    ).textContent =
+        raca;
+
+
+    document.getElementById(
+        "petModal"
+    ).style.display =
+        "flex";
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =====================================================
+   FECHAR MODAL
+===================================================== */
+
+function fecharPet() {
+
+    document.getElementById(
+        "petModal"
+    ).style.display =
+        "none";
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =====================================================
+   FECHAR CLICANDO FORA
+===================================================== */
+
+const modal =
+    document.getElementById(
+        "petModal"
+    );
+
+
+if (modal) {
+
+    modal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === modal
+            ) {
+
+                fecharPet();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FECHAR COM ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            fecharPet();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FAVORITO
+===================================================== */
+
+function favoritarPet(botao) {
+
+    if (
+        botao.classList.contains(
+            "favoritado"
+        )
+    ) {
+
+        botao.classList.remove(
+            "favoritado"
+        );
+
+        botao.textContent =
+            "♡";
+
+    } else {
+
+        botao.classList.add(
+            "favoritado"
+        );
+
+        botao.textContent =
+            "♥";
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

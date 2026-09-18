@@ -1,290 +1,1680 @@
-/* ==============================
-   ESTILO GERAL - MUNDOPET
-   ============================== */
+/* =========================================================
+   MUNDOPET
+   ESTILO PRINCIPAL
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --azul-gelo: #e8f5f8;
+    --azul-claro: #d8edf2;
+    --azul-medio: #b9dce4;
+
+    --preto: #171717;
+    --preto-suave: #252525;
+
+    --laranja: #e8785d;
+    --laranja-escuro: #d96045;
+    --laranja-claro: #fff0ea;
+
+    --branco: #ffffff;
+
+    --cinza: #667078;
+    --cinza-claro: #eef1f2;
+
+    --borda: #dedede;
+
+    --sombra:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+    --sombra-forte:
+        0 15px 40px rgba(0, 0, 0, 0.13);
+
+}
+
+
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
 
 body {
-    background-color: #f8f9fa;
-    color: #333;
-    font-family: Arial, sans-serif;
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--preto);
+
+    background:
+        var(--branco);
+
+    min-height: 100vh;
+
 }
 
-/* ==============================
-   MENU
-   ============================== */
 
-.navbar {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+a {
+    text-decoration: none;
 }
 
-.navbar-brand {
-    font-size: 1.4rem;
-    font-weight: bold;
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
-.navbar .btn {
-    margin-left: 5px;
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar-mundopet {
+
+    width: 100%;
+
+    background: var(--branco);
+
+    border-bottom:
+        1px solid #e5e5e5;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.05);
+
 }
 
-/* ==============================
-   TÍTULOS
-   ============================== */
 
-h1 {
-    font-weight: 700;
-}
+.navbar-container {
 
-h3 {
-    font-weight: 600;
-}
+    max-width: 1250px;
 
-/* ==============================
-   CARDS
-   ============================== */
-
-.card {
-    border: none;
-    border-radius: 15px;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
-}
-
-/* ==============================
-   BOTÕES
-   ============================== */
-
-.btn {
-    border-radius: 10px;
-    font-weight: 500;
-}
-
-.btn-primary {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-/* ==============================
-   FORMULÁRIOS
-   ============================== */
-
-.form-control,
-.form-select {
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.form-control:focus,
-.form-select:focus {
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
-}
-
-/* ==============================
-   RODAPÉ
-   ============================== */
-
-footer {
-    color: #666;
-    border-top: 1px solid #ddd;
-}
-
-/* ==============================
-   TELA INICIAL
-   ============================== */
-
-.hero {
-    padding: 60px 20px;
-}
-
-.hero h1 {
-    font-size: 3rem;
-}
-
-.hero p {
-    max-width: 700px;
     margin: 0 auto;
+
+    min-height: 88px;
+
+    padding:
+        12px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
 }
 
-/* ==============================
-   RESPONSIVIDADE
-   ============================== */
 
-@media (max-width: 768px) {
+/* =========================================================
+   LOGO
+========================================================= */
 
-    .navbar .container {
-        flex-direction: column;
-        gap: 10px;
-    }
+.logo-mundopet {
 
-    .navbar .btn {
-        margin-bottom: 5px;
-    }
+    display: flex;
 
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-}/* ==============================
-   ESTILO GERAL - MUNDOPET
-   ============================== */
+    align-items: center;
 
-body {
-    background-color: #f8f9fa;
-    color: #333;
-    font-family: Arial, sans-serif;
+    gap: 12px;
+
+    color: var(--preto);
+
+    min-width: 220px;
+
 }
 
-/* ==============================
+
+.logo-mundopet:hover {
+    color: var(--preto);
+}
+
+
+.logo-paw {
+
+    width: 54px;
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        var(--laranja-claro);
+
+    border:
+        2px solid var(--preto);
+
+    border-radius: 16px;
+
+    font-size: 27px;
+
+}
+
+
+.logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    line-height: 1.1;
+
+}
+
+
+.logo-text strong {
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.logo-text span {
+
+    margin-top: 5px;
+
+    color: var(--laranja);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+/* =========================================================
    MENU
-   ============================== */
+========================================================= */
 
-.navbar {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+.menu-mundopet {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex: 1;
+
 }
 
-.navbar-brand {
-    font-size: 1.4rem;
-    font-weight: bold;
-}
 
-.navbar .btn {
-    margin-left: 5px;
-}
+.menu-mundopet a {
 
-/* ==============================
-   TÍTULOS
-   ============================== */
+    color: var(--preto);
 
-h1 {
+    font-size: 15px;
+
     font-weight: 700;
-}
 
-h3 {
-    font-weight: 600;
-}
+    padding:
+        13px 18px;
 
-/* ==============================
-   CARDS
-   ============================== */
-
-.card {
-    border: none;
-    border-radius: 15px;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
-}
-
-/* ==============================
-   BOTÕES
-   ============================== */
-
-.btn {
     border-radius: 10px;
-    font-weight: 500;
+
+    transition:
+        0.2s ease;
+
 }
 
-.btn-primary {
-    padding-left: 20px;
-    padding-right: 20px;
+
+.menu-mundopet a:hover {
+
+    background:
+        var(--azul-gelo);
+
+    color:
+        var(--laranja);
+
 }
 
-/* ==============================
-   FORMULÁRIOS
-   ============================== */
 
-.form-control,
-.form-select {
-    border-radius: 10px;
-    padding: 10px;
+.menu-mundopet a.active {
+
+    background:
+        var(--azul-gelo);
+
+    color:
+        var(--laranja);
+
 }
 
-.form-control:focus,
-.form-select:focus {
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+
+/* =========================================================
+   AÇÕES DA NAVBAR
+========================================================= */
+
+.navbar-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    min-width: 190px;
+
+    justify-content: flex-end;
+
 }
 
-/* ==============================
-   RODAPÉ
-   ============================== */
 
-footer {
-    color: #666;
-    border-top: 1px solid #ddd;
+.navbar-heart {
+
+    font-size: 30px;
+
+    color: var(--preto);
+
+    line-height: 1;
+
 }
 
-/* ==============================
-   TELA INICIAL
-   ============================== */
 
-.hero {
-    padding: 60px 20px;
+.btn-adotar-topo {
+
+    background:
+        var(--laranja);
+
+    color:
+        var(--branco);
+
+    border:
+        2px solid var(--preto);
+
+    padding:
+        13px 20px;
+
+    border-radius: 13px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    box-shadow:
+        4px 4px 0 var(--preto);
+
+    transition:
+        0.2s ease;
+
 }
 
-.hero h1 {
-    font-size: 3rem;
+
+.btn-adotar-topo:hover {
+
+    color: var(--branco);
+
+    transform:
+        translateY(-2px);
+
+    background:
+        var(--laranja-escuro);
+
+    box-shadow:
+        5px 6px 0 var(--preto);
+
 }
 
-.hero p {
-    max-width: 700px;
+
+/* =========================================================
+   PÁGINA DA GALERIA
+========================================================= */
+
+.gallery-page {
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--azul-gelo) 0%,
+            #ffffff 45%,
+            #ffffff 100%
+        );
+
+    min-height:
+        calc(100vh - 88px);
+
+    padding:
+        60px 0 80px;
+
+}
+
+
+.gallery-page .container {
+
+    max-width: 1200px;
+
+}
+
+
+/* =========================================================
+   CABEÇALHO DA GALERIA
+========================================================= */
+
+.gallery-header {
+
+    max-width: 800px;
+
+    margin:
+        0 auto 35px;
+
+}
+
+
+.gallery-header > span {
+
+    display: inline-block;
+
+    background:
+        var(--laranja-claro);
+
+    color:
+        var(--laranja);
+
+    border:
+        1px solid #f3c8bb;
+
+    padding:
+        8px 17px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.gallery-header h1 {
+
+    margin-top: 17px;
+
+    margin-bottom: 12px;
+
+    color:
+        var(--preto);
+
+    font-size:
+        clamp(34px, 5vw, 52px);
+
+    font-weight: 900;
+
+    letter-spacing:
+        -1.8px;
+
+}
+
+
+.gallery-header p {
+
+    color:
+        var(--cinza);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
     margin: 0 auto;
+
 }
 
-/* ==============================
-   RESPONSIVIDADE
-   ============================== */
 
-@media (max-width: 768px) {
+/* =========================================================
+   FERRAMENTAS DA GALERIA
+========================================================= */
 
-    .navbar .container {
-        flex-direction: column;
-        gap: 10px;
-    }
+.gallery-tools {
 
-    .navbar .btn {
-        margin-bottom: 5px;
-    }
+    background:
+        var(--branco);
 
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-}
-/* ==============================
-   IDENTIDADE VISUAL MUNDOPET
-   ============================== */
+    border:
+        1px solid var(--borda);
 
-.navbar {
-    background-color: #417cd6 !important;
-}
+    border-radius: 18px;
 
-.navbar-brand {
-    color: white !important;
+    padding:
+        20px;
+
+    margin-bottom:
+        35px;
+
+    box-shadow:
+        var(--sombra);
+
 }
 
-.navbar .btn {
+
+.search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background:
+        var(--cinza-claro);
+
+    border:
+        1px solid #e1e4e5;
+
+    border-radius: 12px;
+
+    padding:
+        0 15px;
+
+    height: 50px;
+
+}
+
+
+.search-box span {
+
+    font-size: 19px;
+
+}
+
+
+.search-box input {
+
+    width: 100%;
+
     border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+
+    color:
+        var(--preto);
+
 }
 
-.hero strong {
-    color: #417cd6;
+
+.search-box input::placeholder {
+    color: #92999d;
 }
 
-.hero {
-    background: white;
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.gallery-filters {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 16px;
+
+}
+
+
+.filter-btn {
+
+    border:
+        1px solid #d9dddf;
+
+    background:
+        var(--branco);
+
+    color:
+        var(--preto);
+
+    border-radius: 10px;
+
+    padding:
+        9px 16px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        0.2s ease;
+
+}
+
+
+.filter-btn:hover {
+
+    border-color:
+        var(--laranja);
+
+    color:
+        var(--laranja);
+
+}
+
+
+.filter-btn.active {
+
+    background:
+        var(--preto);
+
+    border-color:
+        var(--preto);
+
+    color:
+        var(--branco);
+
+}
+
+
+/* =========================================================
+   CARDS DE ADOÇÃO
+========================================================= */
+
+.adoption-card {
+
+    height: 100%;
+
+    background:
+        var(--branco);
+
+    border:
+        1px solid #dfe2e3;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        var(--sombra);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.adoption-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        var(--sombra-forte);
+
+}
+
+
+/* =========================================================
+   IMAGEM DO PET
+========================================================= */
+
+.adoption-image {
+
+    width: 100%;
+
+    height: 245px;
+
+    background:
+        var(--azul-claro);
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+
+.adoption-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.35s ease;
+
+}
+
+
+.adoption-card:hover
+.adoption-image img {
+
+    transform:
+        scale(1.04);
+
+}
+
+
+.pet-placeholder {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 70px;
+
+    background:
+        var(--azul-claro);
+
+}
+
+
+/* =========================================================
+   CONTEÚDO DO CARD
+========================================================= */
+
+.adoption-content {
+
+    padding:
+        22px;
+
+}
+
+
+.adoption-species {
+
+    display: inline-block;
+
+    color:
+        var(--laranja);
+
+    background:
+        var(--laranja-claro);
+
     border-radius: 20px;
-    padding: 60px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
+
+    padding:
+        6px 11px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
 }
+
+
+.adoption-content h2 {
+
+    margin:
+        12px 0 6px;
+
+    color:
+        var(--preto);
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+}
+
+
+.pet-breed {
+
+    color:
+        var(--cinza);
+
+    font-size: 13px;
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.adoption-details {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.adoption-details span {
+
+    background:
+        var(--cinza-claro);
+
+    color:
+        #4f575b;
+
+    border-radius: 8px;
+
+    padding:
+        7px 9px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.adoption-city {
+
+    color:
+        var(--cinza);
+
+    font-size: 13px;
+
+    margin:
+        12px 0;
+
+}
+
+
+.adoption-description {
+
+    color:
+        #5e666a;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    min-height: 42px;
+
+}
+
+
+/* =========================================================
+   RODAPÉ DO CARD
+========================================================= */
+
+.adoption-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top:
+        18px;
+
+    padding-top:
+        16px;
+
+    border-top:
+        1px solid #eeeeee;
+
+}
+
+
+.adoption-status {
+
+    color:
+        var(--laranja);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.btn-adopt {
+
+    border:
+        2px solid var(--preto);
+
+    background:
+        var(--branco);
+
+    color:
+        var(--preto);
+
+    border-radius: 10px;
+
+    padding:
+        9px 14px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        0.2s ease;
+
+}
+
+
+.btn-adopt:hover {
+
+    background:
+        var(--preto);
+
+    color:
+        var(--branco);
+
+}
+
+
+/* =========================================================
+   GALERIA VAZIA
+========================================================= */
+
+.empty-gallery {
+
+    background:
+        var(--branco);
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 20px;
+
+    padding:
+        70px 30px;
+
+    text-align:
+        center;
+
+    box-shadow:
+        var(--sombra);
+
+}
+
+
+.empty-paw {
+
+    font-size: 65px;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.empty-gallery h2 {
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    color:
+        var(--preto);
+
+}
+
+
+.empty-gallery p {
+
+    color:
+        var(--cinza);
+
+    margin-bottom:
+        25px;
+
+}
+
+
+.btn-mundopet-orange {
+
+    display: inline-block;
+
+    background:
+        var(--laranja);
+
+    color:
+        var(--branco);
+
+    padding:
+        12px 22px;
+
+    border-radius: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.btn-mundopet-orange:hover {
+
+    background:
+        var(--laranja-escuro);
+
+    color:
+        var(--branco);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.pet-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(23, 23, 23, 0.65);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+
+}
+
+
+.pet-modal-box {
+
+    position: relative;
+
+    background:
+        var(--branco);
+
+    width: 100%;
+
+    max-width: 460px;
+
+    border-radius: 22px;
+
+    padding: 38px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+
+}
+
+
+.pet-modal-close {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 17px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 32px;
+
+    color:
+        var(--preto);
+
+    cursor: pointer;
+
+}
+
+
+.modal-paw {
+
+    font-size: 55px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.pet-modal-box h2 {
+
+    color:
+        var(--preto);
+
+    font-size: 30px;
+
+    font-weight: 900;
+
+}
+
+
+.pet-modal-box p {
+
+    color:
+        var(--laranja);
+
+    font-weight: 700;
+
+}
+
+
+.modal-adoption-message {
+
+    background:
+        var(--azul-gelo);
+
+    color:
+        var(--preto);
+
+    padding:
+        18px;
+
+    border-radius:
+        12px;
+
+    margin:
+        20px 0;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================================
+   FORMULÁRIOS
+========================================================= */
+
+.container.py-5 {
+
+    max-width:
+        1100px;
+
+}
+
 
 .card {
-    background-color: white;
+
+    border:
+        none !important;
+
 }
 
-footer {
-    margin-top: 50px;
+
+.form-control,
+.form-select {
+
+    border:
+        1px solid #d8dcde;
+
+    border-radius:
+        10px;
+
+    min-height:
+        45px;
+
+}
+
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color:
+        var(--laranja);
+
+    box-shadow:
+        0 0 0 3px rgba(232, 120, 93, 0.15);
+
+}
+
+
+.form-label {
+
+    color:
+        var(--preto);
+
+}
+
+
+.btn {
+
+    transition:
+        0.2s ease;
+
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.footer-mundopet {
+
+    background:
+        var(--preto);
+
+    color:
+        var(--branco);
+
+    margin-top:
+        0;
+
+}
+
+
+.footer-container {
+
+    max-width:
+        1200px;
+
+    margin:
+        0 auto;
+
+    padding:
+        55px 28px 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr 1.5fr;
+
+    gap:
+        45px;
+
+}
+
+
+.footer-brand {
+
+    max-width:
+        330px;
+
+}
+
+
+.footer-logo {
+
+    font-size:
+        22px;
+
+    font-weight:
+        900;
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.footer-brand p {
+
+    color:
+        #c7c7c7;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.footer-column {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        10px;
+
+}
+
+
+.footer-column h3 {
+
+    color:
+        var(--branco);
+
+    font-size:
+        15px;
+
+    font-weight:
+        900;
+
+    margin-bottom:
+        6px;
+
+}
+
+
+.footer-column a,
+.footer-column span {
+
+    color:
+        #c7c7c7;
+
+    font-size:
+        13px;
+
+    transition:
+        0.2s ease;
+
+}
+
+
+.footer-column a:hover {
+
+    color:
+        var(--laranja);
+
+}
+
+
+.footer-message {
+
+    background:
+        #222222;
+
+    border:
+        1px solid #333333;
+
+    border-radius:
+        16px;
+
+    padding:
+        22px;
+
+}
+
+
+.footer-paw {
+
+    font-size:
+        30px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.footer-message h3 {
+
+    font-size:
+        17px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.footer-message p {
+
+    color:
+        #c7c7c7;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.6;
+
+    margin: 0;
+
+}
+
+
+.footer-bottom {
+
+    border-top:
+        1px solid #333333;
+
+    max-width:
+        1200px;
+
+    margin:
+        0 auto;
+
+    padding:
+        18px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap:
+        20px;
+
+    color:
+        #a9a9a9;
+
+    font-size:
+        12px;
+
+}
+
+
+.footer-bottom span:first-child {
+
+    color:
+        var(--laranja);
+
+    font-weight:
+        800;
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .navbar-container {
+
+        flex-wrap:
+            wrap;
+
+        min-height:
+            auto;
+
+        padding:
+            15px 20px;
+
+    }
+
+
+    .logo-mundopet {
+
+        min-width:
+            auto;
+
+    }
+
+
+    .menu-mundopet {
+
+        order:
+            3;
+
+        width:
+            100%;
+
+        flex:
+            none;
+
+        border-top:
+            1px solid #eeeeee;
+
+        padding-top:
+            10px;
+
+    }
+
+
+    .navbar-actions {
+
+        min-width:
+            auto;
+
+    }
+
+
+    .footer-container {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .gallery-page {
+
+        padding:
+            40px 0 60px;
+
+    }
+
+
+    .gallery-header h1 {
+
+        font-size:
+            36px;
+
+    }
+
+
+    .gallery-header p {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .navbar-container {
+
+        gap:
+            12px;
+
+    }
+
+
+    .logo-text strong {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .logo-text span {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .logo-paw {
+
+        width:
+            45px;
+
+        height:
+            45px;
+
+        font-size:
+            22px;
+
+    }
+
+
+    .navbar-heart {
+
+        display:
+            none;
+
+    }
+
+
+    .btn-adotar-topo {
+
+        padding:
+            10px 13px;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .menu-mundopet {
+
+        justify-content:
+            flex-start;
+
+        overflow-x:
+            auto;
+
+    }
+
+
+    .menu-mundopet a {
+
+        white-space:
+            nowrap;
+
+        padding:
+            9px 12px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    .adoption-image {
+
+        height:
+            230px;
+
+    }
+
+
+    .footer-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            30px;
+
+    }
+
+
+    .footer-bottom {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .navbar-container {
+
+        padding:
+            12px 15px;
+
+    }
+
+
+    .logo-mundopet {
+
+        gap:
+            8px;
+
+    }
+
+
+    .logo-text strong {
+
+        font-size:
+            17px;
+
+    }
+
+
+    .btn-adotar-topo {
+
+        font-size:
+            11px;
+
+        padding:
+            9px 10px;
+
+    }
+
+
+    .gallery-header h1 {
+
+        font-size:
+            31px;
+
+    }
+
+
+    .adoption-content {
+
+        padding:
+            18px;
+
+    }
+
 }
